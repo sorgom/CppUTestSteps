@@ -8,9 +8,6 @@
 #define TESTSTEPPERPLUGIN_H
 
 #include <CppUTestExt/MockSupportPlugin.h>
-// TODO: #include <CppUTest/TestPlugin.h>
-
-#include <baselib/BaseTypes.h>
 
 //! the test stepper plugin
 class TestStepperPlugin: public MockSupportPlugin
@@ -49,7 +46,7 @@ private:
 
     //! name of plugin
     //! "TSP"
-    static const CONST_C_STRING cName;
+    static const char* const cName;
 
     //! post test action function pointer
     PostActionFunc mPostAction;
@@ -59,7 +56,7 @@ private:
         MockSupportPlugin(cName),
         mPostAction(0)
     {}
-    //  Standard 8.1.1
+
     TestStepperPlugin(const TestStepperPlugin& o);
     TestStepperPlugin& operator = (const TestStepperPlugin& o);
 };

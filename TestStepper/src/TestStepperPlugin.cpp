@@ -8,7 +8,7 @@ void TestStepperPlugin::setup()
     TestRegistry::getCurrentRegistry()->installPlugin(&TestStepperPlugin::instance());
 }
 
-const CONST_C_STRING TestStepperPlugin::cName = "TSP";
+const char* const TestStepperPlugin::cName = "TSP";
 
 void TestStepperPlugin::preTestAction(UtestShell& s, TestResult& r)
 {
