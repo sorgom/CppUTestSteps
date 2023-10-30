@@ -31,6 +31,9 @@
 *.out
 *.app
 
+bin
+obj
+
 # python
 __pycache__
 *.pyc
