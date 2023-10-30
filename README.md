@@ -18,7 +18,9 @@ will provide you with line of the last STEP() macro placed.
 The STEP() macro also helps
 to give your tests a more readable structure.
 
+## samples
 
+### test code
 ```cpp
 //  ============================================================
 //  failing tests samples
@@ -64,7 +66,7 @@ TEST(TSTS_01, T02)
     ENDSTEPS()
 }
 ```
-
+### test ouput
 ```shell
 ../samples/TSTS_01.cpp:39: error: Failure in TEST(TSTS_01, T02)
         expected <true>
