@@ -22,16 +22,10 @@ to give your tests a more readable structure.
 
 ### test code
 ```cpp
-//  ============================================================
-//  failing tests samples
-//  ============================================================
-//  created by Manfred Sorgo
-
 #include <CppUTestExt/MockSupport.h>
 #include <TestStepper/TestStepper.h>
 
-TEST_GROUP(TSTS_01)
-{};
+TEST_GROUP(TSTS_01) {};
 
 //  failure in STEP(2)
 TEST(TSTS_01, T01)
@@ -68,6 +62,22 @@ TEST(TSTS_01, T02)
 ```
 ### test ouput
 ```shell
+$ bin/tests -b
+
+../samples/TSTS_01.cpp:13: error: Failure in TEST(TSTS_01, T01)
+        Mock Failure: Unexpected parameter value to parameter "value" to function "somecall": <43 (0x2b)>
+        EXPECTED calls that WERE NOT fulfilled related to function: somecall
+                somecall -> int value: <42 (0x2a)> (expected 1 call, called 0 times)
+        EXPECTED calls that WERE fulfilled related to function: somecall
+                <none>
+        ACTUAL unexpected parameter passed to function: somecall
+                int value: <43 (0x2b)>
+
+STEP(2)
+file: ../samples/TSTS_01.cpp
+func: testBody
+line: 20
+.
 ../samples/TSTS_01.cpp:39: error: Failure in TEST(TSTS_01, T02)
         expected <true>
         but was  <false>
@@ -86,21 +96,7 @@ file: ../samples/TSTS_01.cpp
 func: testBody
 line: 39
 .
-../samples/TSTS_01.cpp:13: error: Failure in TEST(TSTS_01, T01)
-        Mock Failure: Unexpected parameter value to parameter "value" to function "somecall": <43 (0x2b)>
-        EXPECTED calls that WERE NOT fulfilled related to function: somecall
-                somecall -> int value: <42 (0x2a)> (expected 1 call, called 0 times)
-        EXPECTED calls that WERE fulfilled related to function: somecall
-                <none>
-        ACTUAL unexpected parameter passed to function: somecall
-                int value: <43 (0x2b)>
-
-STEP(2)
-file: ../samples/TSTS_01.cpp
-func: testBody
-line: 20
-.
-Errors (2 failures, 2 tests, 2 ran, 9 checks, 0 ignored, 0 filtered out, 1 ms)
+Errors (2 failures, 2 tests, 2 ran, 9 checks, 0 ignored, 0 filtered out, 0 ms)
 ```
 
 
