@@ -63,7 +63,9 @@ TEST(TSTS_01, T02)
 ### test ouput
 ```shell
 $ bin/tests -b
-
+```
+**CppUTest**
+```shell
 ../samples/TSTS_01.cpp:13: error: Failure in TEST(TSTS_01, T01)
         Mock Failure: Unexpected parameter value to parameter "value" to function "somecall": <43 (0x2b)>
         EXPECTED calls that WERE NOT fulfilled related to function: somecall
@@ -72,18 +74,24 @@ $ bin/tests -b
                 <none>
         ACTUAL unexpected parameter passed to function: somecall
                 int value: <43 (0x2b)>
-
+```
+**TestStepper**
+```shell
 STEP(2)
 file: ../samples/TSTS_01.cpp
 func: testBody
 line: 20
-.
+```
+**CppUTest**
+```shell
 ../samples/TSTS_01.cpp:39: error: Failure in TEST(TSTS_01, T02)
         expected <true>
         but was  <false>
         difference starts at position 0 at: <          false     >
                                                        ^
-
+```
+**TestStepper**
+```shell
 STEP(2.6)
 
 STEP(2)
@@ -95,7 +103,9 @@ STEP(6)
 file: ../samples/TSTS_01.cpp
 func: testBody
 line: 39
-.
+```
+**CppUTest**
+```shell
 Errors (2 failures, 2 tests, 2 ran, 9 checks, 0 ignored, 0 filtered out, 0 ms)
 ```
 
