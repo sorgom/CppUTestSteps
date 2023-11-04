@@ -1,8 +1,8 @@
-# Test Stepper for CppUTest
+# Test Steps for #CppUTest
 
 #CppUTest
 
-The test stepper solves a great disadvantage of CppUTest:
+The test steps solve a great disadvantage of CppUTest:
 
 When CppUTest exits a test due to an unmatched expectation it only provides
 - the test name
@@ -66,7 +66,8 @@ $ bin/tests -b
 ```
 **CppUTest**
 ```shell
-../samples/TSTS_01.cpp:13: error: Failure in TEST(TSTS_01, T01)
+TEST(TSTS_01, T01)
+../samples/TSTS_01.cpp:20: error: Failure in TEST(TSTS_01, T01)
         Mock Failure: Unexpected parameter value to parameter "value" to function "somecall": <43 (0x2b)>
         EXPECTED calls that WERE NOT fulfilled related to function: somecall
                 somecall -> int value: <42 (0x2a)> (expected 1 call, called 0 times)
@@ -84,6 +85,7 @@ line: 20
 ```
 **CppUTest**
 ```shell
+TEST(TSTS_01, T02)
 ../samples/TSTS_01.cpp:39: error: Failure in TEST(TSTS_01, T02)
         expected <true>
         but was  <false>

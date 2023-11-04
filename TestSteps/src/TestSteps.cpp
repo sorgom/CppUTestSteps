@@ -75,6 +75,7 @@ void TestSteps::step(
 )
 {
     chk(step > 0, c__ErrStep);
+    UtestShell::getCurrent()->setLineNumber(line);
     Trace& trc = mTrace[mLevel];
     trc.step = step;
     trc.file = file;
@@ -93,6 +94,7 @@ void TestSteps::step(
 
 void TestSteps::setLine(const unsigned short line)
 {
+    UtestShell::getCurrent()->setLineNumber(line);
     mTrace[mLevel].line = line;
 }
 
