@@ -1,9 +1,9 @@
 
-#include <TestStepper/TestStepperPlugin.h>
+#include <TestSteps/TestStepsPlugin.h>
 #include <CppUTest/CommandLineTestRunner.h>
 
 int main(const int argc, const char* const* const argv)
 {
-    TestStepperPlugin::setup();
+    TestStepsPlugin::setup();
     return CommandLineTestRunner::RunAllTests(argc, argv);
 }

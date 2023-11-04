@@ -12,7 +12,7 @@ So if you have a test with some amount of lines
 you will have a hard time to figure out
 where exactly the mismatch happens.
 
-Using TestStepper's STEP() macro
+Using TestSteps's STEP() macro
 will provide you with line of the last STEP() macro placed.
 
 The STEP() macro also helps
@@ -23,7 +23,7 @@ to give your tests a more readable structure.
 ### test code
 ```cpp
 #include <CppUTestExt/MockSupport.h>
-#include <TestStepper/TestStepper.h>
+#include <TestSteps/TestSteps.h>
 
 TEST_GROUP(TSTS_01) {};
 
@@ -75,7 +75,7 @@ $ bin/tests -b
         ACTUAL unexpected parameter passed to function: somecall
                 int value: <43 (0x2b)>
 ```
-**TestStepper**
+**TestSteps**
 ```shell
 STEP(2)
 file: ../samples/TSTS_01.cpp
@@ -90,7 +90,7 @@ line: 20
         difference starts at position 0 at: <          false     >
                                                        ^
 ```
-**TestStepper**
+**TestSteps**
 ```shell
 STEP(2.6)
 

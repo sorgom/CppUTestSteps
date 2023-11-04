@@ -8,7 +8,7 @@ workspace 'tests'
     objdir      'obj/%{prj.name}'
 
     includedirs {
-        '../TestStepper/include'
+        '../TestSteps/include'
     }
 
     buildoptions { '-std=c++98 -pedantic-errors' }
@@ -18,7 +18,7 @@ workspace 'tests'
         targetdir   'bin'
 
         files { 
-            '../TestStepper/src/*.cpp',
+            '../TestSteps/src/*.cpp',
             '../samples/*.cpp'
         }
 

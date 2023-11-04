@@ -23,7 +23,7 @@ TARGETDIR = bin
 TARGET = $(TARGETDIR)/tests
 OBJDIR = obj/tests
 DEFINES += -DNDEBUG
-INCLUDES += -I../TestStepper/include
+INCLUDES += -I../TestSteps/include
 FORCE_INCLUDE +=
 ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -std=c++98 -pedantic-errors
@@ -51,12 +51,12 @@ GENERATED :=
 OBJECTS :=
 
 GENERATED += $(OBJDIR)/TSTS_01.o
-GENERATED += $(OBJDIR)/TestStepper.o
-GENERATED += $(OBJDIR)/TestStepperPlugin.o
+GENERATED += $(OBJDIR)/TestSteps.o
+GENERATED += $(OBJDIR)/TestStepsPlugin.o
 GENERATED += $(OBJDIR)/main.o
 OBJECTS += $(OBJDIR)/TSTS_01.o
-OBJECTS += $(OBJDIR)/TestStepper.o
-OBJECTS += $(OBJDIR)/TestStepperPlugin.o
+OBJECTS += $(OBJDIR)/TestSteps.o
+OBJECTS += $(OBJDIR)/TestStepsPlugin.o
 OBJECTS += $(OBJDIR)/main.o
 
 # Rules
@@ -121,10 +121,10 @@ endif
 # File Rules
 # #############################################
 
-$(OBJDIR)/TestStepper.o: ../TestStepper/src/TestStepper.cpp
+$(OBJDIR)/TestSteps.o: ../TestSteps/src/TestSteps.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/TestStepperPlugin.o: ../TestStepper/src/TestStepperPlugin.cpp
+$(OBJDIR)/TestStepsPlugin.o: ../TestSteps/src/TestStepsPlugin.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/TSTS_01.o: ../samples/TSTS_01.cpp
