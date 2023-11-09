@@ -12,7 +12,7 @@ unsigned char TestSteps::mLevel = 0;
 unsigned char TestSteps::mShow = 0;
 
 const char* const TestSteps::c__step = "STEP(";
-const char* const TestSteps::c__precondition = "PRE";
+const char* const TestSteps::c__pre = "PRE";
 const char* const TestSteps::c__printFile = "file: %s\n";
 const char* const TestSteps::c__printFunc = "func: %s\n";
 const char* const TestSteps::c__printLine = "line: %d\n";
@@ -43,6 +43,7 @@ void TestSteps::clearLevel(const unsigned char level)
     for (unsigned char l = level; l < cNmuLevels; ++l)
     {
         memset(&mTrace[l], 0, sizeof(Trace));
+        mTrace[l].step = cStepNone;
     }
     if (level == 0)
     {
@@ -74,7 +75,6 @@ void TestSteps::step(
     const char* const func
 )
 {
-    chk(step > 0, c__ErrStep);
     UtestShell::getCurrent()->setLineNumber(line);
     Trace& trc = mTrace[mLevel];
     trc.step = step;
@@ -83,7 +83,7 @@ void TestSteps::step(
     trc.func = func;
     if (mLevel < cMaxLevel)
     {
-        mTrace[mLevel + 1].step = 0;
+        mTrace[mLevel + 1].step = cStepNone;
     }
     mDone = true;
     if (mShow > mLevel)
@@ -116,7 +116,7 @@ void TestSteps::endSteps()
 
 bool TestSteps::subStepsDone()
 {
-    return mTrace[1].step > 0;
+    return mTrace[1].step != cStepNone;
 }
 
 void TestSteps::out()
@@ -125,7 +125,7 @@ void TestSteps::out()
     for (unsigned char l = 0; l < cNmuLevels; ++l)
     {
         const Trace& trc = mTrace[l];
-        if (trc.step > 0)
+        if (trc.step != cStepNone)
         {
             if (l > 0)
             {
@@ -147,7 +147,7 @@ void TestSteps::trace(const bool insertLine)
     for (unsigned char l = 0; l < cNmuLevels; ++l)
     {
         const Trace& trc = mTrace[l];
-        if (trc.step > 0)
+        if (trc.step != cStepNone)
         {
             if (l > 0)
             {
@@ -156,11 +156,11 @@ void TestSteps::trace(const bool insertLine)
             printf(c__step);
             stepOut(trc.step);
             printf(")\n");
-            if (trc.file not_eq 0)
+            if (trc.file != 0)
             {
                 printf(c__printFile, trc.file);
             }
-            if (trc.func not_eq 0)
+            if (trc.func != 0)
             {
                 printf(c__printFunc, trc.func);
             }
@@ -188,7 +188,7 @@ void TestSteps::fail()
 
 void TestSteps::chk(const bool ok, const char* const msg)
 {
-    if (not ok)
+    if (! ok)
     {
         clear();
         FAIL(msg);
@@ -199,7 +199,7 @@ void TestSteps::stepOut(const unsigned short step)
 {
     if (step == cStepPre)
     {
-        printf(c__precondition);
+        printf(c__pre);
     }
     else
     {

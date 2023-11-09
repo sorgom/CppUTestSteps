@@ -119,13 +119,14 @@ private:
 
     static const unsigned char cNmuLevels = 20;
     static const unsigned char cMaxLevel  = cNmuLevels - 1;
-    static const unsigned short cStepPre = ~ 0;
+    static const unsigned short cStepPre  = ~ 0 - 1;
+    static const unsigned short cStepNone = ~ 0;
 
     //  level traces
     static Trace mTrace[cNmuLevels];
 
     static const char* const c__step;
-    static const char* const c__precondition;
+    static const char* const c__pre;
     static const char* const c__printFile;
     static const char* const c__printFunc;
     static const char* const c__printLine;

@@ -188,14 +188,12 @@ line: 12
 ## sample of main
 
 ```cpp
-01  
-02  #include <TestSteps/TestStepsPlugin.h>
-03  #include <CppUTest/CommandLineTestRunner.h>
-04  
-05  int main(const int argc, const char* const* const argv)   
-06  {
-07      TestStepsPlugin::setup();
-08      return CommandLineTestRunner::RunAllTests(argc, argv);
-09  }
-10
+#include <TestSteps/TestStepsPlugin.h>
+#include <CppUTest/CommandLineTestRunner.h>
+
+int main(const int argc, const char* const* const argv)
+{
+    TestStepsPlugin::setup();
+    return CommandLineTestRunner::RunAllTests(argc, argv);
+}
 ```
