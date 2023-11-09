@@ -20,54 +20,49 @@ to give your tests a more readable structure.
 
 ## samples
 
-### test code
+### simple test code
 ```cpp
-#include <CppUTestExt/MockSupport.h>
-#include <TestSteps/TestSteps.h>
-
-TEST_GROUP(TSTS_01) {};
-
-//  failure in STEP(2)
-TEST(TSTS_01, T01)
-{
-    STEP(1)
-    mock().expectOneCall("somecall").withParameter("value", 42);
-    mock().actualCall("somecall").withParameter("value", 42);
-    mock().checkExpectations(); mock().clear();
-    
-    STEP(2)
-    mock().expectOneCall("somecall").withParameter("value", 42);
-    mock().actualCall("somecall").withParameter("value", 43);
-    mock().checkExpectations(); mock().clear();
-}
-
-//  failure in STEP(2.6)
-TEST(TSTS_01, T02)
-{
-    STEP(1)
-    L_CHECK_EQUAL(2, 2)
-    
-    STEP(2)
-    //  valid 5 steps: 0 .. 4
-    //  invalid 6th step: 5
-    SUBSTEPS()
-    for (unsigned n = 0; n < 10; ++n)
-    {
-        //  STEP(2.1) .. STEP(2.10)
-        LSTEP(n)
-        L_CHECK_TRUE(n < 5)
-    }
-    ENDSTEPS()
-}
+01  #include <CppUTestExt/MockSupport.h>
+02  #include <TestSteps/TestSteps.h>
+03
+04  TEST_GROUP(TSTS_01) {};
+05
+06  //  failure in STEP(2)
+07  TEST(TSTS_01, T01)
+08  {
+09      STEP(1)
+10      mock().expectOneCall("somecall").withParameter("value", 42);
+11      mock().actualCall("somecall").withParameter("value", 42);   
+12      mock().checkExpectations(); mock().clear();
+13
+14      STEP(2)
+15      mock().expectOneCall("somecall").withParameter("value", 42);
+16      mock().actualCall("somecall").withParameter("value", 43);   
+17      mock().checkExpectations(); mock().clear();
+18  }
+19
+20  //  failure in STEP(2.6)
+21  TEST(TSTS_01, T02)
+22  {
+23      STEP(1)
+24      L_CHECK_EQUAL(2, 2)
+25
+26      STEP(2)
+27      SUBSTEPS()
+28      for (unsigned n = 0; n < 10; ++n)
+29      {
+30          LSTEP(n)
+31          L_CHECK_TRUE(n < 5)
+32      }
+33      ENDSTEPS()
+34  }
+35
 ```
 ### test ouput
 ```shell
-$ bin/tests -b
-```
-**CppUTest**
-```shell
+$ bin/tests -b -v
 TEST(TSTS_01, T01)
-../samples/TSTS_01.cpp:20: error: Failure in TEST(TSTS_01, T01)
+../samples/TSTS_01.cpp:14: error: Failure in TEST(TSTS_01, T01)
         Mock Failure: Unexpected parameter value to parameter "value" to function "somecall": <43 (0x2b)>
         EXPECTED calls that WERE NOT fulfilled related to function: somecall
                 somecall -> int value: <42 (0x2a)> (expected 1 call, called 0 times)
@@ -75,41 +70,117 @@ TEST(TSTS_01, T01)
                 <none>
         ACTUAL unexpected parameter passed to function: somecall
                 int value: <43 (0x2b)>
-```
-**TestSteps**
-```shell
+
 STEP(2)
 file: ../samples/TSTS_01.cpp
 func: testBody
-line: 20
-```
-**CppUTest**
-```shell
+line: 14
+
 TEST(TSTS_01, T02)
-../samples/TSTS_01.cpp:39: error: Failure in TEST(TSTS_01, T02)
+../samples/TSTS_01.cpp:31: error: Failure in TEST(TSTS_01, T02)
         expected <true>
         but was  <false>
         difference starts at position 0 at: <          false     >
                                                        ^
-```
-**TestSteps**
-```shell
+
 STEP(2.6)
 
 STEP(2)
 file: ../samples/TSTS_01.cpp
 func: testBody
-line: 32
+line: 26
 
 STEP(6)
 file: ../samples/TSTS_01.cpp
 func: testBody
-line: 39
+line: 31
 ```
-**CppUTest**
+
+### test code calling subroutine
+```cpp
+01  #include <CppUTestExt/MockSupport.h>
+02  #include <TestSteps/TestSteps.h>
+03
+04  TEST_GROUP(TSTS_02)
+05  {
+06      void check010(const int i)
+07      {
+08          SUBSTEPS()
+09          STEP(1)
+10          L_CHECK_TRUE(i >= 0)
+11          STEP(2)
+12          L_CHECK_TRUE(i <= 10)
+13          ENDSTEPS()
+14      }
+15  };
+16
+17  //  failure in STEP(2.1)
+18  TEST(TSTS_02, T01)
+19  {
+20      STEP(1)
+21      check010(1);
+22
+23      STEP(2)
+24      check010(-1);
+25  }
+26
+27  //  failure in STEP(2.12.2)
+28  TEST(TSTS_02, T02)
+29  {
+30      STEP(1)
+31      SUBSTEPS()
+32      for (int i = 0; i < 20; ++i)
+33      {
+34          LSTEP(i)
+35          check010(i);
+36      }
+37      ENDSTEPS()
+38  }
+39
+```
+### test ouput
 ```shell
-Errors (2 failures, 2 tests, 2 ran, 9 checks, 0 ignored, 0 filtered out, 0 ms)
+$ bin/tests -b -v
+TEST(TSTS_02, T01)
+../samples/TSTS_02.cpp:10: error: Failure in TEST(TSTS_02, T01)
+        expected <true>
+        but was  <false>
+        difference starts at position 0 at: <          false     >
+                                                       ^
+
+STEP(2.1)
+
+STEP(2)
+file: ../samples/TSTS_02.cpp
+func: testBody
+line: 23
+
+STEP(1)
+file: ../samples/TSTS_02.cpp
+func: check010
+line: 10
+
+TEST(TSTS_02, T02)
+../samples/TSTS_02.cpp:12: error: Failure in TEST(TSTS_02, T02)
+        expected <true>
+        but was  <false>
+        difference starts at position 0 at: <          false     >
+                                                       ^
+
+STEP(1.12.2)
+
+STEP(1)
+file: ../samples/TSTS_02.cpp
+func: testBody
+line: 30
+
+STEP(12)
+file: ../samples/TSTS_02.cpp
+func: testBody
+line: 34
+
+STEP(2)
+file: ../samples/TSTS_02.cpp
+func: check010
+line: 12
 ```
-
-
-

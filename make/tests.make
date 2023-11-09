@@ -51,10 +51,12 @@ GENERATED :=
 OBJECTS :=
 
 GENERATED += $(OBJDIR)/TSTS_01.o
+GENERATED += $(OBJDIR)/TSTS_02.o
 GENERATED += $(OBJDIR)/TestSteps.o
 GENERATED += $(OBJDIR)/TestStepsPlugin.o
 GENERATED += $(OBJDIR)/main.o
 OBJECTS += $(OBJDIR)/TSTS_01.o
+OBJECTS += $(OBJDIR)/TSTS_02.o
 OBJECTS += $(OBJDIR)/TestSteps.o
 OBJECTS += $(OBJDIR)/TestStepsPlugin.o
 OBJECTS += $(OBJDIR)/main.o
@@ -128,6 +130,9 @@ $(OBJDIR)/TestStepsPlugin.o: ../TestSteps/src/TestStepsPlugin.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/TSTS_01.o: ../samples/TSTS_01.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/TSTS_02.o: ../samples/TSTS_02.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/main.o: ../samples/main.cpp

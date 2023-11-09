@@ -1,8 +1,10 @@
 #   all text files unix line endings
 * text=auto
 
-*.cpp   text eol=lf
-*.h     text eol=lf
-*.py    text eol=lf
-*.lua   text eol=lf
-*.md    text eol=lf
+*.cpp       text eol=lf
+*.h         text eol=lf
+*.py        text eol=lf
+*.lua       text eol=lf
+*.md        text eol=lf
+*.make      text eol=lf
+Makefile    text eol=lf
