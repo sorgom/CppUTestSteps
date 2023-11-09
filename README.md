@@ -18,7 +18,7 @@ will provide you with line of the last STEP() macro placed.
 The STEP() macro also helps
 to give your tests a more readable structure.
 
-## samples
+## test samples
 
 ### simple test code
 ```cpp
@@ -183,4 +183,19 @@ STEP(2)
 file: ../samples/TSTS_02.cpp
 func: check010
 line: 12
+```
+
+## sample of main
+
+```cpp
+01  
+02  #include <TestSteps/TestStepsPlugin.h>
+03  #include <CppUTest/CommandLineTestRunner.h>
+04  
+05  int main(const int argc, const char* const* const argv)   
+06  {
+07      TestStepsPlugin::setup();
+08      return CommandLineTestRunner::RunAllTests(argc, argv);
+09  }
+10
 ```
