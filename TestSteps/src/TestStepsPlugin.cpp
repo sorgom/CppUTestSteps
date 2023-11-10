@@ -21,7 +21,7 @@ void TestStepsPlugin::postTestAction(UtestShell& test, TestResult& result)
     if (test.hasFailed())
     {
         TestSteps::fail();
-        if (mPostAction not_eq 0)
+        if (mPostAction != 0)
         {
             (*mPostAction)();
         }

@@ -37,3 +37,7 @@ obj
 # python
 __pycache__
 *.pyc
+.vs
+*.vcxproj.*
+*.vcxproj
+*.sln
