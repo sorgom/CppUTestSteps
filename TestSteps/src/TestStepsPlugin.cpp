@@ -16,7 +16,7 @@ void TestStepsPlugin::preTestAction(UtestShell& s, TestResult& r)
     TestSteps::clear();
 }
 
-void TestStepsPlugin::postTestAction(UtestShell& test, TestResult& result)
+void TestStepsPlugin::postTestAction(UtestShell& test, TestResult&)
 {
     if (test.hasFailed())
     {
